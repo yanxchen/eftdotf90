@@ -1,4 +1,9 @@
 ! eftdot.f90
+!
+! Reference: 
+! Ogita, T., Rump, S. M., & Oishi, S. I. (2005). Accurate sum and dot product. 
+! SIAM Journal on Scientific Computing, 26(6), 1955-1988.
+!
 module eftdot
     implicit none
 
@@ -13,6 +18,7 @@ module eftdot
     public :: sp, dp, qp, twoSum_s, twoProd_s, dot2_s, twoSum_d, twoProd_d, dot2_d
 
 contains
+    !> For double precision
     !> twoSum for single precision
     subroutine twoSum_s(a, b, x, y)
         real(kind=sp), intent(in) :: a, b
@@ -81,6 +87,7 @@ contains
         res = p + s;
     end subroutine dot2_s
 
+    !> For double precision
     !> twoSum for double precision
     subroutine twoSum_d(a, b, x, y)
         real(kind=dp), intent(in) :: a, b
