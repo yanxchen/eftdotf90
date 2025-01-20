@@ -29,7 +29,7 @@ contains
 
         x = a + b
         z = x - a
-        y = (a - (x - z)) + (b - z);
+        y = (a - (x - z)) + (b - z)
     end subroutine twoSum_s
 
     !> split for single precision
@@ -41,9 +41,9 @@ contains
         factor = 4097.0
         c = 0.0_sp
 
-        c = factor * a;
-        x = c - (c - a);
-        y = a - x;
+        c = factor * a
+        x = c - (c - a)
+        y = a - x
     end subroutine split_s
 
     !> twoProd for single precision
@@ -57,10 +57,10 @@ contains
         b1 = 0.0_sp
         b2 = 0.0_sp
 
-        x = a * b;
+        x = a * b
         call split_s(a, a1, a2)
         call split_s(b, b1, b2)
-        y = a2 * b2 - (((x - a1 * b1) - a2 * b1) - a1 * b2);
+        y = a2 * b2 - (((x - a1 * b1) - a2 * b1) - a1 * b2)
     end subroutine twoProd_s
 
     !> Dot2 for single precision
@@ -68,7 +68,7 @@ contains
         integer, intent(in) :: n
         real(kind=sp), intent(in) :: x(:), y(:)
         real(kind=sp), intent(out) :: res
-        real(kind=sp) :: p, s, h, r, q
+        real(kind=sp) :: p, s, h, r, q, tmp
         integer :: i
 
         p = 0.0_sp
@@ -81,10 +81,11 @@ contains
         call twoProd_s(x(1), y(1), p, s)
         do i = 2, n
             call twoProd_s(x(i), y(i), h, r)
-            call twoSum_s(p, h, p, q)
+            tmp = p
+            call twoSum_s(tmp, h, p, q)
             s = s + (q + r)
         end do
-        res = p + s;
+        res = p + s
     end subroutine dot2_s
 
     !> For double precision
@@ -98,7 +99,7 @@ contains
 
         x = a + b
         z = x - a
-        y = (a - (x - z)) + (b - z);
+        y = (a - (x - z)) + (b - z)
     end subroutine twoSum_d
 
     !> split for double precision
@@ -110,9 +111,9 @@ contains
         factor = 134217729.0
         c = 0.0_dp
 
-        c = factor * a;
-        x = c - (c - a);
-        y = a - x;
+        c = factor * a
+        x = c - (c - a)
+        y = a - x
     end subroutine split_d
 
     !> twoProd for double precision
@@ -126,10 +127,10 @@ contains
         b1 = 0.0_dp
         b2 = 0.0_dp
 
-        x = a * b;
+        x = a * b
         call split_d(a, a1, a2)
         call split_d(b, b1, b2)
-        y = a2 * b2 - (((x - a1 * b1) - a2 * b1) - a1 * b2);
+        y = a2 * b2 - (((x - a1 * b1) - a2 * b1) - a1 * b2)
     end subroutine twoProd_d
 
     !> Dot2 for double precision
@@ -137,7 +138,7 @@ contains
         integer, intent(in) :: n
         real(kind=dp), intent(in) :: x(:), y(:)
         real(kind=dp), intent(out) :: res
-        real(kind=dp) :: p, s, h, r, q
+        real(kind=dp) :: p, s, h, r, q, tmp
         integer :: i
 
         p = 0.0_dp
@@ -150,10 +151,11 @@ contains
         call twoProd_d(x(1), y(1), p, s)
         do i = 2, n
             call twoProd_d(x(i), y(i), h, r)
-            call twoSum_d(p, h, p, q)
+            tmp = p
+            call twoSum_d(tmp, h, p, q)
             s = s + (q + r)
         end do
-        res = p + s;
+        res = p + s
     end subroutine dot2_d
 
 end module eftdot
